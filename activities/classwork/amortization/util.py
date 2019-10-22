@@ -17,7 +17,7 @@ class Amortization(object):
         """
         # Annuity is a periodic payment made to amortize a credit.
         # The value of the annuity remains unchanged through the credit life.
-        annuity = self.amount / ((1-(1+self.interest)**(-self.n))/self.interest)
+        annuity = self.amount * self.interest / (1-(1+self.interest)**(-self.n))
         return annuity
 
     def get_table(self):
@@ -29,7 +29,7 @@ class Amortization(object):
         annuity_ = self.annuity()
         principal_l = [0]
         interest_l = [0]
-        annuity_l = [annuity_]
+        annuity_l = [annuity_]  #
         loan_val_l = [self.amount]
         period_l = [0]
 
