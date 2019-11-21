@@ -31,14 +31,14 @@ case object Problem3 extends Problem {
       parameters('size.as[Int]) {
         size => {
           // <---- Your code starts here. --->
-
           val challengeResponse: String = ???
           // <---- Your code ends  here. ---->
           htmlResponse(challengeResponse)
         }
       }
     }
-
   }
-
 }
+
+
+
