@@ -57,21 +57,22 @@ case object Problem4 extends Problem {
           implicit class StringOps(x: String){
             def asInt: Option[Int] = {
               try {Some(x.toInt)}
-              catch {case e: Exception => None}
+              catch { case _: Throwable => None}
             }
           }
           // B) Implement the calculate method.
           // def calculate(ops: String, a: Int, b: Int): Option[Int] = ???
-          def calculate(ops: String, a: Int, b: Int): Int =
+          def calculate(ops: String, a: Int, b: Int): Option[Int] =
             ops match {
-              case "sum" => a+b: Int
-              case "subtraction" => a-b: Int
-              case "multiplication" => a*b: Int
-              case "division" => a/b: Int
-              // case _ => None: Int // if its type none it can be type Int as it is supposed to be
+              case "sum" => Some(a+b)
+              case "subtraction" => Some(a-b)
+              case "multiplication" => Some(a*b)
+              case "division" => Some(a/b)
+              case _ => None // if its type none it can be type Int as it is supposed to be
             }
           // C) Complete the challenge response variable.
           // val challengeResponse: Option[Calculation] = ???
+          val a: Option[String] = params.get("a")
           val challengeResponse: Option[Calculation] = ???
           // <---- Your code ends  here. ---->
           challengeResponse match {
