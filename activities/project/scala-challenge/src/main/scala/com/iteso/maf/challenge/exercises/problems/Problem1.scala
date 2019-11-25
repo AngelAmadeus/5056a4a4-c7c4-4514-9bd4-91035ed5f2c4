@@ -29,7 +29,6 @@ case object Problem1 extends Problem {
    * Get request: /problems/1?firstWord=abcdef&secondWord=1234
    * Response: {"first":"abcdef","second":"1234","mixed":"a1b2c3d4ef"}
    */
-
   val solution: Route = path("1") {
     get {
       parameters('firstWord.as[String], 'secondWord.as[String]) {

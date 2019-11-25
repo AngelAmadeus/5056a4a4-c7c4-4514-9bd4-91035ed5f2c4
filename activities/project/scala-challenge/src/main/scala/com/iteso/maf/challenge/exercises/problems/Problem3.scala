@@ -39,13 +39,13 @@ case object Problem3 extends Problem {
           for (row <- 0 to number) {
             var list_of_row_numbers = List[String]()
             for (col <- 0 to row)
-              list_of_row_numbers = pascal(col, row).toString :: list_of_row_numbers
+              list_of_row_numbers = pascal(col, row).toString.reverse :: list_of_row_numbers
             val string_of_row = list_of_row_numbers.mkString(" ")
-            list_of_pascal_triangle = ">rb<" + string_of_row :: list_of_pascal_triangle
+            list_of_pascal_triangle = ">rb<" + string_of_row  :: list_of_pascal_triangle
           }
-        val string_of_pascal_triangle = list_of_pascal_triangle.mkString("")
-        val result = string_of_pascal_triangle.reverse.dropRight(4)
-        val challengeResponse: String = result.toString
+          val string_of_pascal_triangle = list_of_pascal_triangle.mkString("")
+          val result = string_of_pascal_triangle.reverse.dropRight(4)
+          val challengeResponse: String = result.toString
           // <---- Your code ends  here. ---->
           htmlResponse(challengeResponse)
         }
@@ -53,6 +53,3 @@ case object Problem3 extends Problem {
     }
   }
 }
-
-
-

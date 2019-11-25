@@ -26,7 +26,6 @@ case object Problem2 extends Problem {
    */
 
   case class SuperDigit(n: Long, k: Long, value: Long)
-
   val solution: Route = path("2") {
     get {
       parameters('n.as[Long], 'k.as[Long]) {
@@ -39,14 +38,11 @@ case object Problem2 extends Problem {
               val s = m.foldLeft(0)(_ + _)
               sumsuper(s)
           }
-
           val m = n.toString.toList.map(c => c.toString.toInt)
           val s = m.foldLeft(0)(_ + _)
           val prod = s * k
           val fg = sumsuper(prod)
-
           val challengeResponse: SuperDigit = SuperDigit(n=n, k=k, value=fg)
-
           // <---- Your code ends  here. ---->
           complete(challengeResponse)
         }

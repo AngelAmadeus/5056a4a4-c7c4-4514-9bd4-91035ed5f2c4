@@ -1,6 +1,7 @@
 package com.iteso.maf.challenge.exercises.problems
 
 import akka.http.scaladsl.server.Route
+import com.iteso.maf.challenge.exercises.problems.Problem5.{Final, IntList, Item}
 
 case object Problem4 extends Problem {
 
@@ -68,12 +69,21 @@ case object Problem4 extends Problem {
               case "subtraction" => Some(a-b)
               case "multiplication" => Some(a*b)
               case "division" => Some(a/b)
-              case _ => None // if its type none it can be type Int as it is supposed to be
+              case _ => None
             }
           // C) Complete the challenge response variable.
           // val challengeResponse: Option[Calculation] = ???
+
           val a: Option[String] = params.get("a")
-          val challengeResponse: Option[Calculation] = ???
+          val a2 = StringOps(a.toString).toString.toInt
+
+          val b: Option[String] = params.get("b")
+          val b2 = StringOps(b.toString).toString.toInt
+
+          val res = calculate(params.get("operation").toString, a2, b2)
+          val res2 = StringOps(res.toString).toString.toInt
+
+          val challengeResponse: Option[Calculation] = Calculation(params.get("operation").toString, a2, b2, res2)
           // <---- Your code ends  here. ---->
           challengeResponse match {
             case None => badRequestResponse
