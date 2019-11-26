@@ -83,7 +83,7 @@ case object Problem4 extends Problem {
           val res = calculate(params.get("operation").toString, a2, b2)
           val res2 = StringOps(res.toString).toString.toInt
 
-          val challengeResponse: Option[Calculation] = Calculation(params.get("operation").toString, a2, b2, res2)
+          val challengeResponse: Option[Calculation] = Option(Calculation(params.get("operation").toString, a2, b2, res2))
           // <---- Your code ends  here. ---->
           challengeResponse match {
             case None => badRequestResponse
