@@ -74,5 +74,4 @@ case object Problem4 extends Problem {
       }
     }
   }
-
 }
