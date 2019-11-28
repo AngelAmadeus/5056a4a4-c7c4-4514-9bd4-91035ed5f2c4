@@ -68,22 +68,29 @@ case object Problem4 extends Problem {
               case "sum" => Some(a+b)
               case "subtraction" => Some(a-b)
               case "multiplication" => Some(a*b)
-              case "division" => Some(a/b)
+              case "division" => try {Some(a/b)}
+                catch { case _: Throwable => None}
               case _ => None
             }
           // C) Complete the challenge response variable.
           // val challengeResponse: Option[Calculation] = ???
 
-          val a: Option[String] = params.get("a")
-          val a2 = StringOps(a.toString).toString.toInt
+          val optA: Option[Int] = params.get("a").flatMap(a => a.asInt)
 
-          val b: Option[String] = params.get("b")
-          val b2 = StringOps(b.toString).toString.toInt
+          val optB: Option[Int] = params.get("b").flatMap(b => b.asInt)
 
-          val res = calculate(params.get("operation").toString, a2, b2)
-          val res2 = StringOps(res.toString).toString.toInt
+          val optOp: Option[String] = params.get("operation")
 
-          val challengeResponse: Option[Calculation] = Option(Calculation(params.get("operation").toString, a2, b2, res2))
+          //val res: Option[Calculation] = optOp.flatMap(op => optA.flatMap(a => optB.flatMap(b => calculate(op, a, b).map(c => Calculation(op, a, b, c)))))
+
+          val res = for {
+            a <- optA
+            b <- optB
+            op <- optOp
+            c <- calculate(op, a, b)
+          } yield Calculation(op, a, b, c)
+
+          val challengeResponse: Option[Calculation] = res
           // <---- Your code ends  here. ---->
           challengeResponse match {
             case None => badRequestResponse
